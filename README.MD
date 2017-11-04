@@ -47,7 +47,7 @@ Information on Initial Coin Offerings was grabbed from [smithandcrown.com](https
  
 ## Data files and data processing
 The following files can be found in the repository: 
-- [data_preparation/ICO_stats_initial_cleanup.csv](ICO_stats_initial_cleanup.csv): dataset with information on ICOs
-- [data_preparation/tx.csv](tx.csv): dataset with information on transactions (daily)
-- [data_preparation/convert.py](convert.py): python script used to process and wrangle data to create a final dataset for visualisation
-- [data_preparation/tx_final_grouped.csv](tx_final_grouped.csv): final dataset with processed data
+- [ICO_stats_initial_cleanup.csv](data_preparation/ICO_stats_initial_cleanup.csv): dataset with information on ICOs
+- [tx.csv](data_preparation/tx.csv): dataset with information on transactions (daily)
+- [convert.py](data_preparation/convert.py): python script used to process and wrangle data to create a final dataset for visualisation
+- [tx_final_grouped.csv](data_preparation/tx_final_grouped.csv): final dataset with processed data
