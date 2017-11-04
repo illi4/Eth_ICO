@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 14px sans-serif;
+}
+
+.y.axisRight text {
+    fill: #4864a9;
+    font-weight: bold;
+}
+
+.y.axisLeft text {
+    fill: #82858c;
+    font-weight: bold;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar1 {
+  fill: #cacacc;
+}
+
+.bar2 {
+  fill: #4864a9;
+}
+
+.x.axis text {
+    fill: black;
+    font: 14px sans-serif;
+}
+ 
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+var margin = {top: 80, right: 120, bottom: 80, left: 80},
+    width = 1200 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y0 = d3.scale.linear().domain([0, 180]).range([height, 0]),
+y1 = d3.scale.linear().domain([0, 4245516]).range([height, 0]);
+
+// xAxis
+var xAxis = d3.svg.axis().scale(x)
+//.tickValues(d3.range('2016-W1', '2017-W, 3))
+.orient("bottom");
+
+// left yAxis
+var yAxisLeft = d3.svg.axis().scale(y0).ticks(10).orient("left");
+// right yAxis
+var yAxisRight = d3.svg.axis().scale(y1).ticks(6).orient("right");
+
+// appending svg
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// load data
+d3.csv("tx_final.csv", type, function(error, data) {
+  x.domain(data.map(function(d) { return d.period; }));
+  y0.domain([0, d3.max(data, function(d) { return d.ico_run; })]);
+
+  
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+  
+  svg.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 6)
+	  .attr("dy", "-2em")
+      .attr("dx", "7.5em")
+	  .style("text-anchor", "end")
+	  .style("text-anchor", "end")
+	  .text("Initial Coin Offerings");
+	
+  svg.append("g")
+	  .attr("class", "y axis axisRight")
+	  .attr("transform", "translate(" + (width) + ",0)")
+	  .call(yAxisRight)
+	.append("text")
+	  .attr("y", 6)
+	  .attr("dy", "-2em")
+	  .attr("dx", "8em")
+	  .style("text-anchor", "end")
+	  .text("# of transactions");
+
+  bars = svg.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function(d) { return x(d.period) + x.rangeBand()/6; })
+      .attr("width", x.rangeBand() /3)
+      .attr("y", function(d) { return y0(d.ico_run); })
+	  .attr("height", function(d,i,j) { return height - y0(d.ico_run); }); 
+
+  bars.append("rect")
+      .attr("class", "bar2")
+      .attr("x", function(d) { return x(d.period) + x.rangeBand()/2; })
+      .attr("width", x.rangeBand() / 3)
+      .attr("y", function(d) { return y1(d.transactions); })
+	  .attr("height", function(d,i,j) { return height - y1(d.transactions); }); 
+
+});
+
+function type(d) {
+  d.ico_run = +d.ico_run;
+  return d;
+}
+
+</script>

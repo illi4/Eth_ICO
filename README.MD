@@ -22,6 +22,8 @@ For this visualisation, I have chosen a dual-axis bar chart as my goal was to sh
 - Changed period description from numerical to naming (e.g. 2017-01 to Jan-2017)
 - Changed the formatting of the number of transactions (split with ',') 
 - Added the 'pre-ICO' average dashed horizontal line     
+
+First drafts are saved in the [initial_versions folder](initial_versions folder).
  
 ## Feedback 
 
