@@ -23,7 +23,7 @@ For this visualisation, I have chosen a dual-axis bar chart as my goal was to sh
 - Changed the formatting of the number of transactions (split with ',') 
 - Added the 'pre-ICO' average dashed horizontal line     
 
-First drafts are saved in the [initial_versions folder](initial_versions folder).
+First drafts are saved in the initial_versions folder: [index_0.1](initial_versions/index_0.1.html), [index_0.3](initial_versions/index_0.3.html).
  
 ## Feedback 
 
