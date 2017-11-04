@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">   
+</head>
+
+<body>
+<h1>Correlation between the number of ICO on Ethereum blockchain and the number of transactions</h1>
+<div class = "smalltext">Credentials: <a href = "https://www.linkedin.com/in/islobodchikov/" target = "_blank" class = "lnkdn">Ilia Slobodchikov</a></div>
+<br>  
+
+<div class = "maintext"><b>Initial Coin Offering (ICO)</b> - an unregulated means by which funds are raised for a new cryptocurrency venture. An Initial Coin Offering (ICO) is used by startups to bypass the rigorous and regulated capital-raising process required by venture capitalists or banks. In an ICO campaign, a percentage of the cryptocurrency is sold to early backers of the project in exchange for legal tender or other cryptocurrencies. Over 2017, ICO received much of the blame for the <a href = "https://en.wikipedia.org/wiki/Ethereum" target = "_blank">Ethereum blockchain </a> working slowly.
+<br><br>
+This graph demonstrates how the growth in the number of ICO running on Ethereum has correlated with the load on the blockchain (number of transaction) starting from September 2016.  
+</div>
+
+
+
+    <script src="d3.v3.min.js"></script>
+    <script src="accounting.min.js"></script>
+    <script>
+   
+    
+        var margin = {
+                top: 80,
+                right: 200,
+                bottom: 40,
+                left: 0,
+                leftAxis: 200
+            },
+            width = 1400 - margin.left - margin.right,
+            height = 700 - margin.top - margin.bottom;
+
+        var x = d3.scale.ordinal()
+            .rangeRoundBands([margin.leftAxis, width], .1);
+
+        var y0 = d3.scale.linear().domain([0, 180]).range([height, 0]),
+            y1 = d3.scale.linear().domain([0, 4245516]).range([height, 0]);
+
+        // xAxis
+        var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+        // left yAxis
+        var yAxisLeft = d3.svg.axis().scale(y0).ticks(10).orient("left");
+        // right yAxis
+        var yAxisRight = d3.svg.axis().scale(y1).ticks(12).orient("right");
+
+        // SVG for text         
+        var svgText = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", 200)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + 0 + ")");
+        
+        // Appending SVG
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("class", "graph")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        // Load data
+        d3.csv("tx_final_grouped.csv", type, function(error, data) {
+            x.domain(data.map(function(d) {
+                return d.period;
+            }));
+            y0.domain([0, d3.max(data, function(d) {
+                return d.ico_run;
+            })]);
+
+        // X axis
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+               
+        
+        // Y #1
+        svg.append("g")
+            .attr("class", "y axis axisLeft")
+            .attr("transform", "translate(" + margin.leftAxis + ",0)")
+            .call(yAxisLeft)
+            .append("text")
+            .attr("y", 6)
+            .attr("dy", "-1em")
+            .attr("dx", "13em")
+            .style("text-anchor", "end")
+            .attr("class", "axheading")
+            .text("Number of Initial Coin Offerings");
+          
+        // >>> Info text about the transactions and ICOs       
+        svgText.append("text").attr("class", "intro_text").attr("y", 123).attr("x", 250);
+        d3.selectAll(".intro_text").style("opacity", 0).transition().duration(1000).delay(50).style("opacity", 1)
+        .text("Until February 2017, there were less than hundred ICOs running on the blockchain monthly");
+
+        svgText.append("text").attr("class", "intro_text_2").attr("y", 153).attr("x", 250);
+        d3.selectAll(".intro_text_2").style("opacity", 0).transition().duration(1000).delay(2500).style("opacity", 1)
+        .text("The average transaction number was around 1.4m per month at the time");
+        
+        svgText.append("text").attr("class", "intro_text_3").attr("y", 123).attr("x", 250);
+        d3.selectAll(".intro_text_3").style("opacity", 0).transition().duration(1000).delay(5500).style("opacity", 1)
+        .text("The number of transactions started increasing rapidly with more ICOs running");
+        
+        svgText.append("text").attr("class", "intro_text_4").attr("y", 123).attr("x", 250);
+        d3.selectAll(".intro_text_4").style("opacity", 0).transition().duration(1000).delay(9000).style("opacity", 1)
+        .text("Select the period to view details");
+
+        d3.selectAll(".intro_text").transition().duration(500).delay(5000).style("opacity", 0);      // Fadeouts 
+        d3.selectAll(".intro_text_2").transition().duration(500).delay(5000).style("opacity", 0);
+        d3.selectAll(".intro_text_3").transition().duration(1000).delay(8500).style("opacity", 0);
+        
+        // >>> 
+
+        // Fixed line 
+        var linedraw = svg.append("line").style("opacity", 0)
+        .attr("x1",  x('Sep-2016') - 10)
+        .attr("y1", y1(1350000))
+        .attr("x2", x('Jun-2017') + 100)
+         .attr("y2", y1(1350000))
+         .transition().duration(2000).delay(2500).style("opacity", 1)
+         .attr("stroke-width", 1)
+         .style("stroke-dasharray", ("3, 3"))
+         .attr("stroke", "black");
+        
+        // Drawing bars 
+        bars = svg.selectAll(".bar").data(data).enter();
+        
+        // Set of bars #1
+        bars.append("rect")
+            .style("opacity","0.6")
+            .attr("class", function(d, i) {
+                return "bar-"+i+ " bar1"
+            })
+            .attr("height", 0)
+            .attr("x", function(d) {
+                return x(d.period) + x.rangeBand() / 6;
+            })
+            .attr("width", x.rangeBand() / 3)
+            .attr("y", function(d) {
+                return height;
+            })
+            .transition()
+            .duration(1000)
+            .delay(function(d, i) {
+                if (i >= 6){ 
+                    return i * 800 + 500;
+                }else{
+                    return i * 300;
+                }
+            })
+            .attr("x", function(d) {
+                return x(d.period) + x.rangeBand() / 6;
+            })
+            .attr("width", x.rangeBand() / 3)
+            .attr("y", function(d) {
+                return y0(d.ico_run);
+            })
+            .attr("height", function(d, i, j) {
+                return height - y0(d.ico_run);
+            });
+
+                
+            // Y #2
+            var y2 = svg.append("g")
+                .attr("class", "y axis axisRight")
+                .attr("transform", "translate(" + (width) + ",0)")
+                .style("opacity", 0);
+            
+            y2.transition().duration(1500).delay(500).call(yAxisRight).style("opacity", 1);
+            
+            var y2_text = y2.append("text")
+                .attr("y", 6)
+                .attr("dy", "-1em")
+                .attr("dx", "10em")
+                .style("text-anchor", "end")
+                .attr("class", "axheading")
+                .style("opacity", 0); 
+                       
+            y2_text.transition().duration(1500).delay(500).style("opacity", 1).text("Number of transactions");
+                
+            // Set of bars #2
+            bars.append("rect")
+                .style("opacity","0.6")
+                .attr("class", function(d, i) {
+                    return "bar-"+i+ " bar2"
+                })
+                .attr("x", function(d) {
+                    return x(d.period) + x.rangeBand() / 2;
+                })
+                .attr("width", x.rangeBand() / 3)
+                .attr("y", function(d) {
+                    return height;
+                })
+                .attr("height", 0)
+                .transition()
+                .duration(1000)
+                .delay(function(d, i) {
+                    if (i  >= 6){ 
+                        return i * 800 + 600;
+                    }else{
+                        return i * 300 + 30;
+                    }
+                })
+                .attr("x", function(d) {
+                    return x(d.period) + x.rangeBand() / 2;
+                })
+                .attr("width", x.rangeBand() / 3)
+                .attr("y", function(d) {
+                    return y1(d.transactions);
+                })
+                .attr("height", function(d, i, j) {
+                    return height - y1(d.transactions);
+                });
+
+            // Bar legend
+            var bar_legend = svg.selectAll("bar.legend")
+            .data(data)
+            .enter().append("g")
+            .attr("class", "bar_legend")
+          
+            bar_legend.append("rect").style("fill", "#dfdfe0")
+               .transition()
+               .duration(750)
+               .delay(function(d, i) {
+                   return i * 75 + 8500;
+               })
+              .attr("x", 30)
+              .attr("y", function(d, i) {
+                    return height - y0(i * 50 + 25);
+              })
+              .attr("width", 80)
+              .attr("height", 35)
+              .style("fill",  "#90a1cb")
+              .style("opacity", 0.8);
+            
+            bar_legend.append("text").style("fill",  "white")
+               .transition()
+               .duration(750)
+               .delay(function(d, i) {
+                   return i * 75 + 100;
+               })
+              .attr("x", 35)
+              .attr("y", function(d, i) {
+                    return height - y0(i * 50 + 50);
+              })
+              .text(function(d) {
+                return d.period;
+              });
+            
+            // Adding actions to buttons 
+            bar_legend.on("click", function(d,i) {
+                d3.selectAll(".bar_legend")
+                  .selectAll("rect")
+                  .transition()
+                  .duration(300)
+                  .style("fill", "#90a1cb");
+
+                d3.select(this)
+                  .selectAll("rect")
+                  .transition()
+                  .duration(300)
+                  .style("fill", "#4864a9")
+                  
+                setBottomText(d);
+                d3.selectAll(".bar1").style("opacity","0.6"); 
+                d3.selectAll(".bar2").style("opacity","0.6");
+                d3.selectAll(".bar-"+i).style("opacity","1");
+            });
+
+
+            //// Changing bottom text 
+            svgText.append("text").attr("class", "info_text").attr("y", 123).attr("x", 250)
+            svgText.append("text").attr("class", "info_text_2").attr("y", 148).attr("x", 250)
+            
+            function setBottomText(dataObj) {
+                // Removing the annotation 
+                svgText.selectAll(".intro_text_4").remove(); 
+                
+                // First line 
+                d3.selectAll(".info_text").transition().duration(200).delay(10).style("opacity", 0);  //fadeout
+                d3.selectAll(".info_text").style("opacity", 0) 
+                  .transition()
+                  .duration(200)
+                  .style("opacity", 1)
+                  .text(function(d) {
+                        return "Initial Coin Offerings running on the Ethereum blockchain: " + dataObj.ico_run  + " ";
+                    });
+
+                // Second line    
+                d3.selectAll(".info_text_2").transition().duration(200).delay(10).style("opacity", 0);  //fadeout
+                d3.selectAll(".info_text_2").style("opacity", 0) 
+                  .transition()
+                  .duration(200)
+                  .style("opacity", 1)
+                  .text(function(d) {
+                        var transactions_formatted = accounting.formatMoney(dataObj.transactions, "", 0, ",", ",");    
+                        return "Number of transactions this month: " + transactions_formatted + " ";
+                    });
+                
+            }
+        });
+
+        function type(d) {
+            d.ico_run = +d.ico_run;
+            return d;
+        }
+    </script>
+
+
+    
+</body>
+</html> 
