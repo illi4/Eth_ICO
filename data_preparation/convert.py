@@ -1,14 +1,8 @@
 import pandas as pd 
 import datetime
-from datetime import timedelta, date 
 import warnings
 import calendar
 warnings.filterwarnings('ignore')
-
-# Helper functions
-def daterange(start_date, end_date):
-    for n in range(int ((end_date - start_date).days)):
-        yield start_date + timedelta(n)
 
 def date_to_month(date): 
     month_val = date.month
@@ -36,23 +30,6 @@ transactions['period'] = transactions['month_descr'] + '-' + transactions['year'
 
 # Get a subset of transactions since Sep 2016
 transactions_filtered = transactions[transactions['date'] > datetime.date(2016, 9, 1)]
-# print transactions_filtered.head()
-
-# Maximum date 
-# print 'Maximum date for daily tx available:', transactions['date'].max()     # this gives 2017-06-12: I decided to exclude June from the visualisation as it is not quite possible to project what transactions were there 
-transactions_filtered = transactions_filtered[transactions_filtered['date'] < datetime.date(2017, 6, 1)]
-
-''' 
-# Extrapolating data 
-transactions_jun_avg = transactions[transactions['period'] == 'Jun-2017']['transactions'].mean()
-
-# Filling extrapolated values 
-start_date = date(2017, 6, 13)
-end_date = date(2017, 7, 1)
-for single_date in daterange(start_date, end_date):
-    # print single_date.strftime("%Y-%m-%d") 
-    transactions_filtered.loc[len(transactions_filtered.index)] = ['NA', transactions_jun_avg, datetime.datetime.combine(single_date, datetime.datetime.min.time()), date_to_month(single_date), 'Jun', '2017', '2017-06', 'Jun-2017'] 
-''' 
 
 # Read information on ICO statistics
 ico = pd.read_csv('ICO_stats_initial_cleanup.csv')
@@ -68,4 +45,4 @@ grouped_transactions = grouped_transactions.reset_index()
 grouped_transactions = grouped_transactions.sort_values('period_n', ascending=True)
 del grouped_transactions['period_n']
 
-grouped_transactions.to_csv('tx_final.csv')
+grouped_transactions.to_csv('tx_final_grouped.csv')
