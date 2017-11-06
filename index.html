@@ -16,7 +16,6 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
 </div>
 
 
-
     <script src="d3.v3.min.js"></script>
     <script src="accounting.min.js"></script>
     <script>
@@ -101,10 +100,20 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
         .delay(2500).style("opacity", 1)
         .text("The average transaction number was around 1.4m per month at the time");
         
+        svgText.append("text").attr("class", "intro_text_extra_1").attr("y", 183).attr("x", 250);
+        d3.selectAll(".intro_text_extra_1").style("opacity", 0).transition().duration(1000)
+        .delay(2500).style("opacity", 1)
+        .text("Running ICOs were not creating a bottleneck in the network");
+        
         svgText.append("text").attr("class", "intro_text_3").attr("y", 123).attr("x", 250);
         d3.selectAll(".intro_text_3").style("opacity", 0).transition().duration(1000)
         .delay(5500).style("opacity", 1)
         .text("The number of transactions started increasing rapidly with more ICOs running");
+        
+        svgText.append("text").attr("class", "intro_text_extra_2").attr("y", 153).attr("x", 250);
+        d3.selectAll(".intro_text_extra_2").style("opacity", 0).transition().duration(1000)
+        .delay(5500).style("opacity", 1)
+        .text("Peaking in 594 ICOs running during the month of May 2017");
         
         svgText.append("text").attr("class", "intro_text_4").attr("y", 123).attr("x", 250);
         d3.selectAll(".intro_text_4").style("opacity", 0).transition().duration(1000)
@@ -114,8 +123,9 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
         // Fadeouts 
         d3.selectAll(".intro_text").transition().duration(500).delay(5000).style("opacity", 0);      
         d3.selectAll(".intro_text_2").transition().duration(500).delay(5000).style("opacity", 0);
+        d3.selectAll(".intro_text_extra_1").transition().duration(500).delay(5000).style("opacity", 0);
+        d3.selectAll(".intro_text_extra_2").transition().duration(1000).delay(8500).style("opacity", 0);
         d3.selectAll(".intro_text_3").transition().duration(1000).delay(8500).style("opacity", 0);
-
 
         // Fixed line 
         var linedraw = svg.append("line").style("opacity", 0)
