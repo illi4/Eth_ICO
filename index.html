@@ -10,7 +10,7 @@
 <div class = "smalltext">Credentials: <a href = "https://www.linkedin.com/in/islobodchikov/" target = "_blank" class = "lnkdn">Ilia Slobodchikov</a></div>
 <br>  
 
-<div class = "maintext"><b>Initial Coin Offering (ICO)</b> - an unregulated means by which funds are raised for a new cryptocurrency venture. An Initial Coin Offering (ICO) is used by startups to bypass the rigorous and regulated capital-raising process required by venture capitalists or banks. In an ICO campaign, a percentage of the cryptocurrency is sold to early backers of the project in exchange for legal tender or other cryptocurrencies. Over 2017, ICO received much of the blame for the <a href = "https://en.wikipedia.org/wiki/Ethereum" target = "_blank">Ethereum blockchain </a> working slowly.
+<div class = "maintext"><b><a href = "https://en.wikipedia.org/wiki/Initial_coin_offering" target = "_blank">Initial Coin Offering (ICO)</a></b> - an unregulated means by which funds are raised for a new cryptocurrency venture. An Initial Coin Offering (ICO) is used by startups to bypass the rigorous and regulated capital-raising process required by venture capitalists or banks. In an ICO campaign, a percentage of the cryptocurrency is sold to early backers of the project in exchange for legal tender or other cryptocurrencies. Over 2017, ICO received much of the blame for the <a href = "https://en.wikipedia.org/wiki/Ethereum" target = "_blank">Ethereum blockchain </a> working slowly.
 <br><br>
 This graph demonstrates how the growth in the number of ICO running on Ethereum has correlated with the load on the blockchain (number of transaction) starting from September 2016.  
 </div>
@@ -20,8 +20,7 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
     <script src="d3.v3.min.js"></script>
     <script src="accounting.min.js"></script>
     <script>
-   
-    
+
         var margin = {
                 top: 80,
                 right: 200,
@@ -92,26 +91,31 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
           
         // >>> Info text about the transactions and ICOs       
         svgText.append("text").attr("class", "intro_text").attr("y", 123).attr("x", 250);
-        d3.selectAll(".intro_text").style("opacity", 0).transition().duration(1000).delay(50).style("opacity", 1)
+        
+        d3.selectAll(".intro_text").style("opacity", 0).transition().duration(1000)
+        .delay(50).style("opacity", 1)
         .text("Until February 2017, there were less than hundred ICOs running on the blockchain monthly");
 
         svgText.append("text").attr("class", "intro_text_2").attr("y", 153).attr("x", 250);
-        d3.selectAll(".intro_text_2").style("opacity", 0).transition().duration(1000).delay(2500).style("opacity", 1)
+        d3.selectAll(".intro_text_2").style("opacity", 0).transition().duration(1000)
+        .delay(2500).style("opacity", 1)
         .text("The average transaction number was around 1.4m per month at the time");
         
         svgText.append("text").attr("class", "intro_text_3").attr("y", 123).attr("x", 250);
-        d3.selectAll(".intro_text_3").style("opacity", 0).transition().duration(1000).delay(5500).style("opacity", 1)
+        d3.selectAll(".intro_text_3").style("opacity", 0).transition().duration(1000)
+        .delay(5500).style("opacity", 1)
         .text("The number of transactions started increasing rapidly with more ICOs running");
         
         svgText.append("text").attr("class", "intro_text_4").attr("y", 123).attr("x", 250);
-        d3.selectAll(".intro_text_4").style("opacity", 0).transition().duration(1000).delay(9000).style("opacity", 1)
+        d3.selectAll(".intro_text_4").style("opacity", 0).transition().duration(1000)
+        .delay(9000).style("opacity", 1)
         .text("Select the period to view details");
-
-        d3.selectAll(".intro_text").transition().duration(500).delay(5000).style("opacity", 0);      // Fadeouts 
+        
+        // Fadeouts 
+        d3.selectAll(".intro_text").transition().duration(500).delay(5000).style("opacity", 0);      
         d3.selectAll(".intro_text_2").transition().duration(500).delay(5000).style("opacity", 0);
         d3.selectAll(".intro_text_3").transition().duration(1000).delay(8500).style("opacity", 0);
-        
-        // >>
+
 
         // Fixed line 
         var linedraw = svg.append("line").style("opacity", 0)
@@ -131,7 +135,7 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
         bars.append("rect")
             .style("opacity","0.6")
             .attr("class", function(d, i) {
-                return "bar-"+i+ " bar1"
+                return "bar-"+i+ " bar1";
             })
             .attr("height", 0)
             .attr("x", function(d) {
@@ -144,11 +148,10 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
             .transition()
             .duration(1000)
             .delay(function(d, i) {
-                if (i >= 6){ 
-                    return i * 800 + 500;
-                }else{
-                    return i * 300;
+                if (i  >= 6){ 
+                    return i * 800 + 600;
                 }
+                return i * 300 + 30;
             })
             .attr("x", function(d) {
                 return x(d.period) + x.rangeBand() / 6;
@@ -178,13 +181,14 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
                 .attr("class", "axheading")
                 .style("opacity", 0); 
                        
-            y2_text.transition().duration(1500).delay(500).style("opacity", 1).text("Number of transactions");
+            y2_text.transition().duration(1500).delay(500)
+            .style("opacity", 1).text("Number of transactions");
                 
             // Set of bars #2
             bars.append("rect")
                 .style("opacity","0.6")
                 .attr("class", function(d, i) {
-                    return "bar-"+i+ " bar2"
+                    return "bar-"+i+ " bar2";
                 })
                 .attr("x", function(d) {
                     return x(d.period) + x.rangeBand() / 2;
@@ -199,9 +203,8 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
                 .delay(function(d, i) {
                     if (i  >= 6){ 
                         return i * 800 + 600;
-                    }else{
-                        return i * 300 + 30;
                     }
+                    return i * 300 + 30;
                 })
                 .attr("x", function(d) {
                     return x(d.period) + x.rangeBand() / 2;
@@ -218,7 +221,7 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
             var bar_legend = svg.selectAll("bar.legend")
             .data(data)
             .enter().append("g")
-            .attr("class", "bar_legend")
+            .attr("class", "bar_legend");
           
             bar_legend.append("rect").style("fill", "#dfdfe0")
                .transition()
@@ -261,7 +264,7 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
                   .selectAll("rect")
                   .transition()
                   .duration(300)
-                  .style("fill", "#4864a9")
+                  .style("fill", "#4864a9");
                   
                 setBottomText(d);
                 d3.selectAll(".bar1").style("opacity","0.6"); 
@@ -271,8 +274,8 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
 
 
             //// Changing bottom text 
-            svgText.append("text").attr("class", "info_text").attr("y", 123).attr("x", 250)
-            svgText.append("text").attr("class", "info_text_2").attr("y", 148).attr("x", 250)
+            svgText.append("text").attr("class", "info_text").attr("y", 123).attr("x", 250);
+            svgText.append("text").attr("class", "info_text_2").attr("y", 148).attr("x", 250);
             
             function setBottomText(dataObj) {
                 // Removing the annotation 
@@ -308,7 +311,5 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
         }
     </script>
 
-
-    
 </body>
 </html> 
