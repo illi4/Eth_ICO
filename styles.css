@@ -19,10 +19,10 @@
    }
    
    .intro_text, .intro_text_2, .intro_text_3, .intro_text_4 { 
-        font: 20px sans-serif;
+        font: 22px sans-serif;
    }
-   .intro_text_xtra1, .intro_text_xtra2 {
-        font: 20px sans-serif;
+   .intro_text_5, .intro_text_6 {
+        font: 22px sans-serif;
    } 
    
     .maintext {
