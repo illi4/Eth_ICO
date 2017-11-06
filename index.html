@@ -60,7 +60,7 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         // Load data
-        d3.csv("tx_final_grouped.csv", type, function(error, data) {
+        d3.csv("tx_final.csv", type, function(error, data) {
             x.domain(data.map(function(d) {
                 return d.period;
             }));
@@ -131,7 +131,7 @@ This graph demonstrates how the growth in the number of ICO running on Ethereum 
         var linedraw = svg.append("line").style("opacity", 0)
         .attr("x1",  x('Sep-2016') - 10)
         .attr("y1", y1(1350000))
-        .attr("x2", x('Jun-2017') + 100)
+        .attr("x2", x('May-2017') + 100)
          .attr("y2", y1(1350000))
          .transition().duration(2000).delay(2500).style("opacity", 1)
          .attr("stroke-width", 1)

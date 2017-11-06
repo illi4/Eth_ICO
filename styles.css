@@ -1,0 +1,102 @@
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #636363;
+        shape-rendering: crispEdges;
+    }
+
+   div.legend_buttons {
+     position: fixed;
+     top: 5px;
+     left: 50px;
+   }
+
+   div.legend_buttons div {
+     background-color: rgb(251, 201, 127);
+     padding: 3px;
+     margin: 7px;
+   }
+   
+   .intro_text, .intro_text_2, .intro_text_3, .intro_text_4 { 
+        font: 22px sans-serif;
+   }
+   .intro_text_5, .intro_text_6 {
+        font: 22px sans-serif;
+   } 
+   
+    .maintext {
+        margin-left: 1.5em;
+        margin-right: 1.5em;
+        font: 20px sans-serif;
+    }
+    
+    a.lnkdn {
+        font: 15px sans-serif;
+        color: #051c42;
+    }
+    
+    .smalltext {
+        margin-left: 2.1em;
+        font: 15px sans-serif;
+        color: #051c42;
+    }
+    
+    .info_text, .info_text_2 {
+        font: 20px sans-serif;
+    }
+
+    a {
+        font: 20px sans-serif;
+        color: #051c42;
+        text-decoration: none;
+    } 
+    
+    body {
+        font: 16px sans-serif;
+    }
+
+    h1 {
+        margin-left: 1.2em;
+        margin-bottom: 0em;
+        font: 1.5em sans-serif;
+        font-weight: bold;
+    }
+    
+    .x.axis text {
+        fill: black;
+        font: 15px sans-serif;
+    }
+    
+    .y.axisRight text {
+        fill: #d95f02;
+    }
+    
+    .y.axisRight text.axheading {
+        fill: #d95f02;
+        font: 19px sans-serif;
+        font-weight: bold;
+    }
+    
+    .y.axisLeft text {
+        fill: #377eb8;
+    }
+    
+    .y.axisLeft text.axheading {
+        fill: #377eb8;
+        font: 19px sans-serif;
+        font-weight: bold;
+    }
+    
+    .bar1 {
+        fill: #377eb8;
+    }
+
+    .bar2 {
+        fill: #d95f02;
+    }
+    
+    svg {
+      position: absolute;
+    }
+     
