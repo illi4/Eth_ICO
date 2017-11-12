@@ -34,25 +34,11 @@ transactions['year'] = transactions['date'].dt.year
 transactions['period_n'] = transactions['year'].map(str) + '-' + transactions['month'].map(str)
 transactions['period'] = transactions['month_descr'] + '-' + transactions['year'].map(str)
 
-# Get a subset of transactions since Sep 2016
-transactions_filtered = transactions[transactions['date'] > datetime.date(2016, 9, 1)]
+# Get a subset of transactions since Mar 2016
+transactions_filtered = transactions[transactions['date'] >= datetime.date(2016, 3, 1)]
 # print transactions_filtered.head()
 
-# Maximum date 
-# print 'Maximum date for daily tx available:', transactions['date'].max()     # this gives 2017-06-12: I decided to exclude June from the visualisation as it is not quite possible to project what transactions were there 
-transactions_filtered = transactions_filtered[transactions_filtered['date'] < datetime.date(2017, 6, 1)]
-
-''' 
-# Extrapolating data 
-transactions_jun_avg = transactions[transactions['period'] == 'Jun-2017']['transactions'].mean()
-
-# Filling extrapolated values 
-start_date = date(2017, 6, 13)
-end_date = date(2017, 7, 1)
-for single_date in daterange(start_date, end_date):
-    # print single_date.strftime("%Y-%m-%d") 
-    transactions_filtered.loc[len(transactions_filtered.index)] = ['NA', transactions_jun_avg, datetime.datetime.combine(single_date, datetime.datetime.min.time()), date_to_month(single_date), 'Jun', '2017', '2017-06', 'Jun-2017'] 
-''' 
+transactions_filtered = transactions_filtered[transactions_filtered['date'] < datetime.date(2017, 10, 1)]
 
 # Read information on ICO statistics
 ico = pd.read_csv('ICO_stats_initial_cleanup.csv')

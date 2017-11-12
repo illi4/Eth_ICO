@@ -44,7 +44,7 @@ First drafts are saved in the initial_versions folder: [index_0.1](initial_versi
  
 ## Resources
 
-A dataset of Ethereum transactions (daily) from [Kaggle](https://www.kaggle.com/kingburrito666/ethereum-historical-data) was used. 
+A dataset of Ethereum transactions (daily) from [Etherscan](https://etherscan.io/chart/tx) was used. 
 Information on Initial Coin Offerings was grabbed from [smithandcrown.com](https://www.smithandcrown.com/icos/#recent_completed).   
  
 ## Data files and data processing
