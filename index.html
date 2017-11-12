@@ -46,7 +46,7 @@ Click on the button below to start the visualisation.
     <script src="accounting.min.js"></script>
     
     <script>
-    // "use strict";
+    "use strict";
     // Main animation 
     function start_animation() {
         
@@ -179,7 +179,7 @@ Click on the button below to start the visualisation.
         .attr("stroke", "black");
         
         //// Drawing bars 
-        bars = svg.selectAll(".bar").data(data).enter();
+        var bars = svg.selectAll(".bar").data(data).enter();
         
         // Delay values for further use 
         function delay_val(i) {
@@ -334,7 +334,7 @@ Click on the button below to start the visualisation.
             
             function setBottomText(dataObj) {
                 // Removing the annotation 
-                j = arrayLength - 1; 
+                var j = arrayLength - 1; 
                 svgText.selectAll(".intro_text_" + j).remove(); 
                 
                 // First line 
