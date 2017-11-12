@@ -44,8 +44,10 @@ Click on the button below to start the visualisation.
     <script src="accounting.min.js"></script>
     
     <script>
+    // "use strict";
     // Main animation 
     function start_animation() {
+        
         // Variables for further use 
         var delay_y2 = 6000; 
         
@@ -77,8 +79,8 @@ Click on the button below to start the visualisation.
         var x = d3.scale.ordinal()
             .rangeRoundBands([margin.leftAxis, width], .1);
 
-        var y0 = d3.scale.linear().domain([0, 10679242]).range([height, 0]);
-        var y1 = d3.scale.linear().domain([0, 1833]).range([height, 0]);
+        var y0 = d3.scale.linear().domain([0, 12000000]).range([height, 0]);
+        var y1 = d3.scale.linear().domain([0, 2000]).range([height, 0]);
 
         var xAxis = d3.svg.axis().scale(x).orient("bottom");    // xAxis
         var yAxisLeft = d3.svg.axis().scale(y0).ticks(10).orient("left");   // left yAxis
