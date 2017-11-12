@@ -7,7 +7,8 @@
 
 <body>
 <h1>Correlation between the number of ICO on Ethereum blockchain and the number of transactions</h1>
-<div class = "smalltext">Credentials: <a href = "https://www.linkedin.com/in/islobodchikov/" target = "_blank" class = "lnkdn">Ilia Slobodchikov</a></div>
+<div class = "smalltext" id = "refresh">Credentials: <a href = "https://www.linkedin.com/in/islobodchikov/" target = "_blank" class = "lnkdn">
+Ilia Slobodchikov</a></div>
 <br>  
 
 <div class = "caption_main">Background</div>
@@ -37,6 +38,7 @@ increased the number of transactions.<br><br>
 Click on the button below to start the visualisation. 
 </div>
 
+
 <button onclick="start_animation()" class="button_start" id = "btn">Show me the numbers</button>
 <br> 
 
@@ -64,6 +66,11 @@ Click on the button below to start the visualisation.
             caption_text.item(i).style.display = 'none';
         }
        
+       // Adding an update button 
+      var newdiv = document.createElement('div');
+      newdiv.innerHTML = '<a href="javascript:window.location.reload();" class = "refresher">Click to return to the introduction</a>';
+      document.getElementById('refresh').appendChild(newdiv);
+
         // Main - setting margins
         var margin = {
                 top: 80,
@@ -364,6 +371,6 @@ Click on the button below to start the visualisation.
     }
     </script>
     
-
+ 
 </body>
 </html> 

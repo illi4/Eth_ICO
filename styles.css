@@ -33,9 +33,16 @@
         font-weight: bold;
     }
     
-    a.lnkdn {
-        font: 15px sans-serif;
+    .lnkdn {
+        font: 16px sans-serif;
         color: #051c42;
+    }
+    
+    .refresher {
+        margin-top: 0.5em;
+        font: 16px sans-serif;
+        color: #0e0b3a;
+        font-weight: bold;
     }
     
     .smalltext {
