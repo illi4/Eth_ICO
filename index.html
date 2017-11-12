@@ -158,7 +158,7 @@ Click on the button below to start the visualisation.
         for (var i = 0; i < arrayLength; i++) {
             svgText.append("text").attr("class", "intro_text_" + i).attr("x", text_items[i][1]).attr("y", text_items[i][2]);
             d3.selectAll(".intro_text_" + i).style("opacity", 0)
-                    .style("font-size", "20px")
+                    .style("font-size", "18px")
                     .transition().duration(text_items[i][4])
                     .delay(text_items[i][3]).style("opacity", 1)
                     .text(text_items[i][0]);
